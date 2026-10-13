@@ -1,9 +1,11 @@
-# Hosted agents with Microsoft-Decision-1 in Microsoft Foundry: a decision pattern for multi-agent workflows
+# Payments Trust Fabric on hosted agents: Microsoft-Decision-1 decides, LLMs write, people sign off
 
-A reference implementation of a pattern for agentic and multi-agent workflows. **Microsoft-Decision-1** makes the fast,
-calibrated decisions and routes the work, **policy code** turns its probabilities into outcomes, **LLM agents** only
-write, and **people** own adverse actions. The worked example, **Payments Trust Fabric**, runs the pattern as a hosted
-agent in Foundry Agent Service and deploys to a new resource group with one command (`azd up`).
+**Payments Trust Fabric** is a multi-agent reference implementation for payments decisions: agentic checkout, disputes
+and chargebacks, merchant integrity, and scams and sanctions. It runs as a hosted agent in Foundry Agent Service and
+deploys to a dedicated resource group with one command (`azd up`). **Microsoft-Decision-1** makes the fast, calibrated
+decisions and routes the work, **policy code** turns its probabilities into outcomes, **LLM agents** only write, and
+**people** sign off on adverse actions. The same decision pattern applies to agentic and multi-agent workflows in other
+industries.
 
 > [!IMPORTANT]
 > **Demo only. Not built for production.** This is a reference implementation for learning and demonstration. It runs
