@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="Payments Trust Fabric - Microsoft Foundry Trust Loop" id="payments-trust-fabric-microsoft-foundry-trust-loop">
+    <mxGraphModel dx="2600" dy="1600" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1760" pageHeight="1040" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Evaluate, observe, and improve loop in Microsoft Foundry" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#1f2937;fontSize=30;fontStyle=1;align=left;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="30" y="20" width="1100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="The optimizer can propose writer prompt changes; Microsoft-Decision-1 questions and policy code remain human-reviewed engineering artifacts." style="text;html=1;strokeColor=none;fillColor=none;fontColor=#4b5563;fontSize=16;align=left;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="30" y="62" width="1500" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="deploy" value="Deploy agent version" style="rounded=1;whiteSpace=wrap;html=1;fontColor=default;align=center;verticalAlign=middle;spacing=8;fillColor=#ecfdf5;strokeColor=#059669;fontSize=16;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="70" y="180" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="eval" value="Foundry evaluations&#xa;gate the release" style="rounded=1;whiteSpace=wrap;html=1;fontColor=default;align=center;verticalAlign=middle;spacing=8;fillColor=#ecfdf5;strokeColor=#059669;fontSize=16;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="380" y="120" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="builtin" value="Built-in evaluators&#xa;task adherence | intent resolution&#xa;relevance | coherence&#xa;indirect attack | content safety" style="rounded=1;whiteSpace=wrap;html=1;fontColor=default;align=center;verticalAlign=middle;spacing=8;fillColor=#ffffff;strokeColor=#6B7280;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="360" y="285" width="305" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="rubric" value="Rubric evaluator&#xa;domain quality and policy fit" style="rounded=1;whiteSpace=wrap;html=1;fontColor=default;align=center;verticalAlign=middle;spacing=8;fillColor=#ffffff;strokeColor=#6B7280;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="700" y="285" width="230" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="codeeval" value="Custom code evaluators&#xa;disposition accuracy&#xa;policy invariants&#xa;writer contract" style="rounded=1;whiteSpace=wrap;html=1;fontColor=default;align=center;verticalAlign=middle;spacing=8;fillColor=#ffffff;strokeColor=#6B7280;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="970" y="285" width="250" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="prod" value="Production traces&#xa;every Microsoft-Decision-1 call and policy step&#xa;returned as tool calls" style="rounded=1;whiteSpace=wrap;html=1;fontColor=default;align=center;verticalAlign=middle;spacing=8;fillColor=#f5f0ff;strokeColor=#7C3AED;fontSize=16;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="160" width="300" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tools" value="Tool calls:&#xa;microsoft_decision_1&#xa;apply_trust_policy" style="rounded=1;whiteSpace=wrap;html=1;fontColor=default;align=center;verticalAlign=middle;spacing=8;fillColor=#f8fafc;strokeColor=#475569;fontSize=16;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="335" width="300" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="insights" value="Foundry Insights&#xa;finds patterns in traces" style="rounded=1;whiteSpace=wrap;html=1;fontColor=default;align=center;verticalAlign=middle;spacing=8;fillColor=#ecfdf5;strokeColor=#059669;fontSize=16;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="980" y="570" width="250" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="optimizer" value="Agent Optimizer&#xa;proposes prompt candidates&#xa;for LLM writer skills" style="rounded=1;whiteSpace=wrap;html=1;fontColor=default;align=center;verticalAlign=middle;spacing=8;fillColor=#ecfdf5;strokeColor=#059669;fontSize=16;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="650" y="675" width="270" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="review" value="Human review&#xa;accept or reject each file" style="rounded=1;whiteSpace=wrap;html=1;fontColor=default;align=center;verticalAlign=middle;spacing=8;fillColor=#eff6ff;strokeColor=#2563EB;fontSize=16;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="325" y="670" width="250" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="guardrail" value="Never optimizer targets:&#xa;Microsoft-Decision-1 questions&#xa;confidence policy code" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEFCE8;strokeColor=#CA8A04;fontColor=#374151;fontSize=15;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="325" y="810" width="250" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="newver" value="New version" style="rounded=1;whiteSpace=wrap;html=1;fontColor=default;align=center;verticalAlign=middle;spacing=8;fillColor=#ecfdf5;strokeColor=#059669;fontSize=16;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="70" y="675" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e-deploy-eval" value="candidate release" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontColor=#374151;fontSize=14;strokeColor=#374151;strokeWidth=2;strokeColor=#475569;exitX=1;exitY=0.35;entryX=0;entryY=0.5;" edge="1" source="deploy" target="eval" parent="1">
+          <mxGeometry relative="1" x="0" y="-12" as="geometry" />
+        </mxCell>
+        <mxCell id="e-eval-prod" value="release passes gate" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontColor=#374151;fontSize=14;strokeColor=#374151;strokeWidth=2;strokeColor=#475569;exitX=1;exitY=0.45;entryX=0;entryY=0.45;" edge="1" source="eval" target="prod" parent="1">
+          <mxGeometry relative="1" x="0.1" y="-14" as="geometry">
+            <Array as="points">
+              <mxPoint x="850" y="180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-eval-built" value="runs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontColor=#374151;fontSize=14;strokeColor=#374151;strokeWidth=2;strokeColor=#475569;exitX=0.25;exitY=1;entryX=0.35;entryY=0;" edge="1" source="eval" target="builtin" parent="1">
+          <mxGeometry relative="1" x="-0.25" y="10" as="geometry">
+            <Array as="points">
+              <mxPoint x="445" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-eval-rubric" value="scores" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontColor=#374151;fontSize=14;strokeColor=#374151;strokeWidth=2;strokeColor=#475569;exitX=0.55;exitY=1;entryX=0.5;entryY=0;" edge="1" source="eval" target="rubric" parent="1">
+          <mxGeometry relative="1" x="0" y="12" as="geometry">
+            <Array as="points">
+              <mxPoint x="815" y="255" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-eval-code" value="checks" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontColor=#374151;fontSize=14;strokeColor=#374151;strokeWidth=2;strokeColor=#475569;exitX=0.85;exitY=1;entryX=0.35;entryY=0;" edge="1" source="eval" target="codeeval" parent="1">
+          <mxGeometry relative="1" x="0.2" y="10" as="geometry">
+            <Array as="points">
+              <mxPoint x="1065" y="255" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-prod-tools" value="trace contents" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontColor=#374151;fontSize=14;strokeColor=#374151;strokeWidth=2;strokeColor=#7C3AED;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" source="prod" target="tools" parent="1">
+          <mxGeometry relative="1" x="0.2" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="e-tools-insights" value="analyze traces" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontColor=#374151;fontSize=14;strokeColor=#374151;strokeWidth=2;strokeColor=#7C3AED;exitX=0;exitY=0.7;entryX=1;entryY=0.35;" edge="1" source="tools" target="insights" parent="1">
+          <mxGeometry relative="1" x="0.1" y="12" as="geometry">
+            <Array as="points">
+              <mxPoint x="1270" y="605" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-ins-opt" value="patterns inform candidates" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontColor=#374151;fontSize=14;strokeColor=#374151;strokeWidth=2;strokeColor=#F97316;exitX=0;exitY=0.65;entryX=1;entryY=0.35;" edge="1" source="insights" target="optimizer" parent="1">
+          <mxGeometry relative="1" x="0.1" y="12" as="geometry" />
+        </mxCell>
+        <mxCell id="e-opt-review" value="candidate files" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontColor=#374151;fontSize=14;strokeColor=#374151;strokeWidth=2;strokeColor=#F97316;exitX=0;exitY=0.5;entryX=1;entryY=0.45;" edge="1" source="optimizer" target="review" parent="1">
+          <mxGeometry relative="1" x="-0.35" y="-28" as="geometry" />
+        </mxCell>
+        <mxCell id="e-review-new" value="accepted changes" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontColor=#374151;fontSize=14;strokeColor=#374151;strokeWidth=2;strokeColor=#2563EB;exitX=0;exitY=0.45;entryX=1;entryY=0.45;" edge="1" source="review" target="newver" parent="1">
+          <mxGeometry relative="1" x="0.1" y="-12" as="geometry" />
+        </mxCell>
+        <mxCell id="e-new-eval" value="evaluate again" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontColor=#374151;fontSize=14;strokeColor=#374151;strokeWidth=2;strokeColor=#475569;exitX=0.5;exitY=0;entryX=0.1;entryY=1;" edge="1" source="newver" target="eval" parent="1">
+          <mxGeometry relative="1" x="-0.2" y="-12" as="geometry">
+            <Array as="points">
+              <mxPoint x="175" y="520" />
+              <mxPoint x="420" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-guard-review" value="review boundary" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontColor=#374151;fontSize=14;strokeColor=#374151;strokeWidth=2;strokeColor=#2563EB;dashed=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" source="guardrail" target="review" parent="1">
+          <mxGeometry relative="1" x="0.2" y="8" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,9 @@
+agent-framework-core==1.21.0
+agent-framework-foundry==1.14.0
+agent-framework-foundry-hosting==1.0.0b261002
+azure-ai-agentserver-optimization==1.0.0b1
+azure-identity==1.26.0
+httpx==0.28.1
+opentelemetry-api==1.45.0
+pydantic==2.13.5
+python-dotenv==1.2.4

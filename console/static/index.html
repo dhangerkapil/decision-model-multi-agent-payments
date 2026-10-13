@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payments Trust Fabric · Microsoft-Decision-1</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">◆</div>
+      <div>
+        <div class="title">Payments Trust Fabric</div>
+        <div class="subtitle">Trust decisions at transaction speed · Microsoft-Decision-1 · Microsoft Foundry hosted agent (Agent Framework)</div>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button data-tab="live" class="active">Live cases</button>
+      <button data-tab="firehose">Firehose</button>
+      <button data-tab="calibrate">Calibrate on your data</button>
+      <button data-tab="benchmark">Benchmark</button>
+      <button data-tab="roi">ROI</button>
+      <button data-tab="review">Review queue <span class="badge" id="review-count">0</span></button>
+      <button data-tab="architecture">Architecture</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- LIVE CASES -->
+    <section id="tab-live" class="tab active">
+      <div class="split">
+        <aside class="panel left">
+          <h3>Hero scenarios</h3>
+          <div id="hero-list" class="hero-list"></div>
+          <h3>All 120 labelled events</h3>
+          <div class="row">
+            <select id="event-select"></select>
+            <button class="primary" id="run-event">Run</button>
+          </div>
+          <h3>Or send anything</h3>
+          <textarea id="free-text" rows="4" placeholder="Type a customer message, e.g. 'Someone from my bank told me to move $3,000 to a safe account' — or paste a JSON event"></textarea>
+          <button class="primary wide" id="run-text">Run through the hosted agent</button>
+          <p class="hint">Runs call the <b>payments-trust-fabric</b> hosted agent in Foundry. Every decision is made by Microsoft-Decision-1; LLM agents only draft text.</p>
+        </aside>
+        <div class="panel right" id="result">
+          <div class="empty">
+            <h2>Pick a scenario</h2>
+            <p>The workflow runs <b>Shield ∥ Dispatcher</b> in parallel, then one of four lanes. Microsoft-Decision-1 gates, routes, scores and judges. LLM agents draft only when a draft adds value. Humans own adverse actions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FIREHOSE -->
+    <section id="tab-firehose" class="tab">
+      <div class="panel">
+        <div class="row space">
+          <div>
+            <h2>Firehose — decision-only triage</h2>
+            <p class="muted">Every event runs the full Microsoft-Decision-1 path (shield, dispatch, lane decisions, confidence policy) with no LLM calls.</p>
+          </div>
+          <div class="row">
+            <label>Events <select id="fh-count"><option>12</option><option selected>24</option><option>48</option><option>120</option></select></label>
+            <label>Lane <select id="fh-lane"><option value="">All lanes</option><option value="agent_payment">Agentic checkout</option><option value="dispute">Disputes</option><option value="merchant_review">Merchant integrity</option><option value="scam_or_account_risk">Scams &amp; sanctions</option></select></label>
+            <button class="primary" id="fh-run">Run firehose</button>
+          </div>
+        </div>
+        <div class="kpis" id="fh-kpis"></div>
+        <p class="hint" id="fh-quota"></p>
+        <div class="table-wrap"><table id="fh-table"><thead><tr><th>Event</th><th>Lane</th><th>Disposition</th><th>Expected</th><th></th><th>Decisions</th><th>D1 ms</th></tr></thead><tbody></tbody></table></div>
+      </div>
+      <div class="panel">
+        <h2>Full labelled baseline (all 120 events)</h2>
+        <div id="baseline"></div>
+      </div>
+    </section>
+
+    <!-- CALIBRATE -->
+    <section id="tab-calibrate" class="tab">
+      <div class="panel">
+        <h2>Calibrate on your data — the proof-of-concept validation pack</h2>
+        <p class="muted">Upload labelled history (CSV with <code>text,label</code> columns): closed disputes with reason codes, alerts with analyst outcomes, merchant reviews with decisions. Microsoft-Decision-1 answers every row; you get accuracy, calibration, the share you can automate at a target accuracy, and stability when options are reordered.</p>
+        <div class="row wrap">
+          <input type="file" id="cal-file" accept=".csv" />
+          <button id="cal-sample">Use sample (30 dispute messages)</button>
+          <label class="grow">Question <input id="cal-instructions" value="Which dispute reason category best fits the cardholder's claim?" /></label>
+          <label>Max rows <input id="cal-max" type="number" value="60" min="5" max="200" /></label>
+          <button class="primary" id="cal-run">Run calibration</button>
+        </div>
+        <div id="cal-result"></div>
+      </div>
+    </section>
+
+    <!-- BENCHMARK -->
+    <section id="tab-benchmark" class="tab">
+      <div class="panel"><h2>Microsoft-Decision-1 vs LLMs on the same decisions</h2><div id="bench"></div></div>
+    </section>
+
+    <!-- ROI -->
+    <section id="tab-roi" class="tab">
+      <div class="panel">
+        <h2>ROI model</h2>
+        <p class="muted">Adjust volumes and handling times. The automation rates come from the labelled baseline and the decision cost from measured tokens.</p>
+        <div id="roi"></div>
+      </div>
+    </section>
+
+    <!-- REVIEW -->
+    <section id="tab-review" class="tab">
+      <div class="panel">
+        <h2>Human review queue</h2>
+        <p class="muted">Cases where the policy requires a human: consumer step-ups, analyst reviews, sanctions holds, quarantines. Microsoft-Decision-1 recommends; people decide.</p>
+        <div id="review"></div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section id="tab-architecture" class="tab">
+      <div class="panel" id="architecture"></div>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+  <script src="/static/app2.js"></script>
+</body>
+</html>

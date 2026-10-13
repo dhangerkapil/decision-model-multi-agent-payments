@@ -1,0 +1,18 @@
+# Build context for console/Dockerfile is the repository root; only console/ and the agent's trust_fabric package are used.
+.git
+.github
+.azure
+**/.venv
+**/venv
+**/__pycache__
+**/*.pyc
+**/.env
+**/.pytest_cache
+**/.foundry
+docs
+infra
+scripts
+tools
+evals
+src/payments-trust-fabric/tests
+src/payments-trust-fabric/data

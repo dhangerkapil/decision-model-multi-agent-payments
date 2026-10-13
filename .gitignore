@@ -1,0 +1,25 @@
+# azd environments and local settings
+.azure/
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Foundry local cache, evaluation results and traffic
+.foundry/
+
+# Optional outputs of tools/evaluate.py and tools/benchmark.py (baked into the console image when present)
+console/data/firehose_baseline.json
+console/data/benchmark.json
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+*.log

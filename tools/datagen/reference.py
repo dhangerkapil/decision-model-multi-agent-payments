@@ -1,0 +1,99 @@
+"""Synthetic reference data for the Payments Trust Fabric demo. All names are fictional."""
+
+AS_OF = "2026-10-09"
+
+POLICIES = {
+    "auto_credit_limit_usd": 100,
+    "agent_default_hard_cap_usd": 500,
+    "blocked_agent_mccs": ["6051", "7995", "4829", "6540"],
+    "reg_e_z_ack_days": 10,
+}
+
+MCC_CATALOG = {
+    "5411": {"name": "Grocery stores and supermarkets", "risk": "low"},
+    "5661": {"name": "Shoe stores", "risk": "low"},
+    "5691": {"name": "Clothing stores", "risk": "low"},
+    "5641": {"name": "Children's apparel", "risk": "low"},
+    "5712": {"name": "Furniture and home furnishings", "risk": "low"},
+    "5719": {"name": "Miscellaneous home furnishing specialty", "risk": "low"},
+    "5732": {"name": "Electronics stores", "risk": "medium"},
+    "5812": {"name": "Restaurants", "risk": "low"},
+    "5942": {"name": "Book stores", "risk": "low"},
+    "5940": {"name": "Bicycle shops", "risk": "low"},
+    "5995": {"name": "Pet shops and supplies", "risk": "low"},
+    "5462": {"name": "Bakeries", "risk": "low"},
+    "7832": {"name": "Motion picture theaters", "risk": "low"},
+    "7523": {"name": "Parking lots and garages", "risk": "low"},
+    "4111": {"name": "Local commuter transport", "risk": "low"},
+    "4816": {"name": "Computer network and information services", "risk": "medium"},
+    "5968": {"name": "Direct marketing - continuity / subscription", "risk": "high"},
+    "5999": {"name": "Miscellaneous and specialty retail", "risk": "medium"},
+    "5122": {"name": "Drugs, drug proprietaries and sundries", "risk": "high"},
+    "5993": {"name": "Cigar stores, tobacco and vape", "risk": "high"},
+    "5944": {"name": "Jewelry and watch stores", "risk": "medium"},
+    "6051": {"name": "Quasi-cash and crypto assets", "risk": "high"},
+    "7995": {"name": "Betting and casino gambling", "risk": "high"},
+    "7273": {"name": "Dating services", "risk": "high"},
+    "4829": {"name": "Money transfer", "risk": "high"},
+    "8999": {"name": "Professional services", "risk": "medium"},
+    "4722": {"name": "Travel agencies and tour operators", "risk": "medium"},
+    "7997": {"name": "Clubs, gyms and memberships", "risk": "medium"},
+    "7922": {"name": "Theatrical producers and ticket agencies", "risk": "medium"},
+    "5816": {"name": "Digital goods - games", "risk": "medium"},
+    "7699": {"name": "Miscellaneous repair shops", "risk": "low"},
+}
+
+CONSUMERS = {
+    "CUS-1001": {"name": "Maya Chen", "payment_method": "Woodgrove Bank rewards credit card •••• 4421", "tenure_years": 7, "home": "Seattle, WA", "agent_mandates_enabled": True},
+    "CUS-1002": {"name": "James Okafor", "payment_method": "Woodgrove Bank Gold charge card •••• 1009", "tenure_years": 11, "home": "Atlanta, GA", "agent_mandates_enabled": True},
+    "CUS-1003": {"name": "Priya Raman", "payment_method": "Contoso Pay wallet (balance + linked debit)", "tenure_years": 5, "home": "Austin, TX", "agent_mandates_enabled": True},
+    "CUS-1004": {"name": "Robert Hale", "payment_method": "Contoso Pay wallet (linked checking)", "tenure_years": 14, "home": "Tucson, AZ", "age_band": "70+", "agent_mandates_enabled": False},
+    "CUS-1005": {"name": "Sofia Alvarez", "payment_method": "Contoso Credit Union debit card •••• 7730", "tenure_years": 3, "home": "Miami, FL", "agent_mandates_enabled": True},
+    "CUS-1006": {"name": "Daniel Kim", "payment_method": "Woodgrove Bank Platinum charge card •••• 3002", "tenure_years": 9, "home": "New York, NY", "agent_mandates_enabled": True},
+    "CUS-1007": {"name": "Aisha Bello", "payment_method": "Contoso Pay wallet with person-to-person payments", "tenure_years": 2, "home": "Chicago, IL", "agent_mandates_enabled": False},
+    "CUS-1008": {"name": "Tom Becker", "payment_method": "Woodgrove Bank credit card •••• 9184", "tenure_years": 1, "home": "Denver, CO", "agent_mandates_enabled": True},
+}
+
+AGENTS = {
+    "AGT-01": {"name": "Proseware Shopper", "verified_signature": True, "registry_status": "trusted", "operator": "Proseware, Inc."},
+    "AGT-02": {"name": "Litware Cart Assistant", "verified_signature": True, "registry_status": "trusted", "operator": "Litware, Inc."},
+    "AGT-03": {"name": "Nod Buyer", "verified_signature": False, "registry_status": "unknown", "operator": "unregistered"},
+    "AGT-04": {"name": "A. Datum Deal Bot", "verified_signature": True, "registry_status": "probation", "operator": "A. Datum Deals LLC"},
+}
+
+MERCHANTS = {
+    "MER-2001": {"name": "Tailwind Traders", "mcc": "5661", "domain": "tailwind-traders.example", "status": "active", "vamp_ratio_pct": 0.21},
+    "MER-2002": {"name": "Adventure Works", "mcc": "5661", "domain": "adventure-works.example", "status": "active", "vamp_ratio_pct": 1.12},
+    "MER-2003": {"name": "Contoso Pizza", "mcc": "5812", "domain": "contoso-pizza.example", "status": "active", "vamp_ratio_pct": 0.05},
+    "MER-2004": {"name": "Fabrikam Fitness", "mcc": "5968", "domain": "fabrikam-fitness.example", "status": "active", "vamp_ratio_pct": 0.94},
+    "MER-2005": {"name": "Best For You Organics", "mcc": "5411", "domain": "best-for-you-organics.example", "status": "active", "vamp_ratio_pct": 0.03},
+    "MER-2006": {"name": "VanArsdel Kitchenware", "mcc": "5719", "domain": "vanarsdel-kitchen.example", "status": "active", "vamp_ratio_pct": 0.18},
+    "MER-2007": {"name": "Fourth Coffee Direct", "mcc": "5719", "domain": "fourth-coffee-direct.example", "status": "active", "vamp_ratio_pct": 1.48},
+    "MER-2008": {"name": "Contoso Cinemas Downtown", "mcc": "7832", "domain": "contoso-cinemas.example", "status": "active", "vamp_ratio_pct": 0.07},
+    "MER-2009": {"name": "Contoso Ink & Toner", "mcc": "5999", "domain": "contoso-ink.example", "status": "active", "vamp_ratio_pct": 0.66},
+    "MER-2010": {"name": "Relecloud Domains", "mcc": "4816", "domain": "relecloud-domains.example", "status": "active", "vamp_ratio_pct": 0.31},
+    "MER-2011": {"name": "Lucerne Publishing", "mcc": "5942", "domain": "lucerne-publishing.example", "status": "active", "vamp_ratio_pct": 0.04},
+    "MER-2012": {"name": "Blue Yonder Parking SFO", "mcc": "7523", "domain": "blue-yonder-parking.example", "status": "active", "vamp_ratio_pct": 0.09},
+    "MER-2013": {"name": "Contoso Coin Exchange", "mcc": "6051", "domain": "contoso-coin.example", "status": "active", "vamp_ratio_pct": 2.4},
+    "MER-2014": {"name": "Wingtip Kids", "mcc": "5641", "domain": "wingtip-kids.example", "status": "active", "vamp_ratio_pct": 0.11},
+    "MER-2015": {"name": "Contoso Metro Transit", "mcc": "4111", "domain": "contoso-metro.example", "status": "active", "vamp_ratio_pct": 0.01},
+    "MER-2016": {"name": "Fabrikam Electronics", "mcc": "5732", "domain": "fabrikam-electronics.example", "status": "active", "vamp_ratio_pct": 0.72},
+    "MER-2017": {"name": "Northwind Traders", "mcc": "5691", "domain": "northwind-traders.example", "status": "active", "vamp_ratio_pct": 0.88},
+    "MER-2018": {"name": "Tailspin Gadget Deals", "mcc": "5732", "domain": "tailspin-gadgets.example", "status": "active", "vamp_ratio_pct": 1.9},
+}
+
+WATCHLIST = {
+    "comprehensively_sanctioned_jurisdictions": ["Cuba", "Iran", "North Korea", "Syria", "Crimea region", "so-called DNR", "so-called LNR"],
+    "listed_parties": ["Coho Meridian Trading LLC", "Humongous Orbis Shipping", "Munson Falcon Exchange", "Trey Petro Logistics"],
+    "note": "Fictional demo list. A keyword hit is not a true match; context decides.",
+}
+
+REFERENCE = {
+    "as_of": AS_OF,
+    "policies": POLICIES,
+    "mcc_catalog": MCC_CATALOG,
+    "consumers": CONSUMERS,
+    "agents": AGENTS,
+    "merchants": MERCHANTS,
+    "watchlist": WATCHLIST,
+}

@@ -1,0 +1,23 @@
+# Agent Optimizer configuration for the Payments Trust Fabric writer agents.
+# Run from the project root:  azd ai agent optimize --config eval.yaml
+# Paths under agent.config and dataset.local_uri resolve relative to the agent service folder (src/payments-trust-fabric).
+# Targets (auto-detected from the baseline): the shared communications policy (instructions.md) and one skill per LLM
+# writer role (skills/*/SKILL.md). Microsoft-Decision-1 decisions and policy code are not optimizer targets; model selection is off.
+name: ptf-writer-optimization
+agent:
+  name: decision-payments-agent
+  kind: hosted
+  version: "1"   # the deployed agent version to optimize (see azd env AGENT_DECISION_PAYMENTS_AGENT_VERSION)
+  model: gpt-5.6-luna
+  config: .agent_configs/baseline/metadata.yaml
+dataset:
+  local_uri: ../../evals/optimizer_tasks.jsonl
+evaluators:
+  - builtin.task_adherence
+  - name: ptf_case_quality
+    version: "2"
+options:
+  eval_model: gpt-5.4-mini
+  optimization_model: gpt-5.4
+  max_candidates: 4
+

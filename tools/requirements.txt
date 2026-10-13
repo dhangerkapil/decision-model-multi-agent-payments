@@ -1,0 +1,7 @@
+# Dependencies for tools/ (evaluation, benchmark, Foundry evaluations, Insights, smoke test).
+# Install from the repository root:  pip install -r tools/requirements.txt
+# tools/generate_data.py needs only the Python standard library.
+-r ../src/payments-trust-fabric/requirements.txt
+azure-ai-projects==2.7.0
+openai==3.24.0
+requests==2.34.2

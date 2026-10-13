@@ -1,0 +1,4 @@
+name: decision-payments-agent
+model: gpt-5.6-luna
+instruction_file: instructions.md
+skill_dir: skills
