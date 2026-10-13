@@ -4,6 +4,10 @@ Payments Trust Fabric is one hosted agent in Foundry Agent Service whose code is
 Inside the workflow, Microsoft-Decision-1 makes the decisions and routes the work, LLM agents write the messages, and
 policy code decides which outcomes are automatic and which go to people.
 
+> [!IMPORTANT]
+> This is a demonstration, not a production system. It runs on synthetic data and isn't connected to any payment
+> system. See [From demo to production](../README.md#from-demo-to-production).
+
 - [The pattern](#the-pattern)
 - [Microsoft-Decision-1 in this solution](#microsoft-decision-1-in-this-solution)
 - [Workflow and routing](#workflow-and-routing)
@@ -156,6 +160,12 @@ Outcomes: `ALLOW`, `AUTO_WARNING` (the customer still decides), `HUMAN_HOLD` (ca
 ## Azure resources
 
 ![Azure architecture](images/architecture.png)
+
+The diagram shows the production shape: issuer, network, acquirer, and wallet systems send events to the hosted agent
+(flow 1) and receive the outcome, reasons, draft, and decision trace (flow 4), and adverse or uncertain cases go to
+people (flow 5). In this demo, a synthetic dataset and the web console stand in for the payment systems and the case
+management system. Customer, merchant, AI agent registry, watch list, and policy lookups come from `data/reference.json`
+(`trust_fabric/case.py`); in production they would come from your systems of record.
 
 | Resource (names use a unique suffix) | Details |
 |---|---|

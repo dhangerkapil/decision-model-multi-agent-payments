@@ -1,5 +1,9 @@
 # Deployment guide
 
+> [!NOTE]
+> These steps deploy a demonstration environment with synthetic data. It isn't built for production; see
+> [From demo to production](../README.md#from-demo-to-production).
+
 - [Before you start](#before-you-start)
 - [Deploy with azd](#deploy-with-azd)
 - [Parameters](#parameters)

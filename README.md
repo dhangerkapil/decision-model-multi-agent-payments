@@ -1,21 +1,46 @@
-# Payments Trust Fabric: hosted agents with Microsoft-Decision-1 in Microsoft Foundry
+# Hosted agents with Microsoft-Decision-1 in Microsoft Foundry: a decision pattern for multi-agent workflows
 
-A multi-agent payments workflow that runs as a **hosted agent in Foundry Agent Service**. **Microsoft-Decision-1** makes
-the fast, calibrated decisions and routes the work. **LLM agents** only write the messages. **People** own every adverse
-action. The repository includes the agent, a web console, synthetic data, evaluation tools, and Bicep templates that
-deploy everything to a new resource group with one command (`azd up`).
+A reference implementation of a pattern for agentic and multi-agent workflows. **Microsoft-Decision-1** makes the fast,
+calibrated decisions and routes the work, **policy code** turns its probabilities into outcomes, **LLM agents** only
+write, and **people** own adverse actions. The worked example, **Payments Trust Fabric**, runs the pattern as a hosted
+agent in Foundry Agent Service and deploys to a new resource group with one command (`azd up`).
 
-Payments is the example, but the pattern fits most agentic and multi-agent workflows: screen and route each request,
-answer typed questions with a decision model, let policy code turn calibrated probabilities into outcomes, have LLMs
-write only when there's something to say, and send low-confidence or adverse cases to people.
+> [!IMPORTANT]
+> **Demo only. Not built for production.** This is a reference implementation for learning and demonstration. It runs
+> on synthetic data, isn't connected to any payment system, has a demo console without sign-in, and uses thresholds tuned
+> on synthetic data. It isn't a Microsoft product. All company, merchant, product, and person names in the data are
+> fictitious. See [From demo to production](#from-demo-to-production) for what a real deployment needs.
 
-> This is a reference implementation built on synthetic data, not a Microsoft product. All company, merchant, product,
-> and person names in the data are fictitious. Validate thresholds on your own labeled history before you automate any
-> decision.
+## The pattern
+
+Agents can now act for people: they shop, issue refunds, approve requests, and move money, and each action needs a
+decision that's fast, consistent, cheap, and auditable. LLMs are a poor fit for that job: they're slower, cost more per
+decision, return text you have to parse, and can be steered by the content they're judging. Microsoft-Decision-1 is a
+decision model for that job. It answers typed questions from options you define, with a calibrated probability for each
+option, in a fraction of a second, and it doesn't generate free-form text or call tools
+([Microsoft Learn](https://learn.microsoft.com/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision)).
+
+The pattern has four steps:
+
+1. **Screen and route.** Microsoft-Decision-1 checks each request for attacks on the AI, such as prompt injection,
+   quarantines them, and chooses the agent that should handle the rest.
+2. **Decide.** That agent asks its questions in one Microsoft-Decision-1 call, and policy code compares the calibrated
+   answers with thresholds that your team owns.
+3. **Write and check.** When a message is needed, Microsoft-Decision-1 picks the model tier, an LLM writes the draft, and
+   Microsoft-Decision-1 checks the draft against a rubric, sending it back for revision when needed.
+4. **Review.** Low-confidence cases and adverse actions go to people, with the decision record attached.
+
+The pattern fits most agentic workflows that classify, route, approve, or check things, such as triaging insurance
+claims, routing customer service requests, prioritizing IT incidents, or screening suppliers. To apply it to your
+domain, see [Adapt the pattern to another domain](docs/ARCHITECTURE.md#adapt-the-pattern-to-another-domain).
+
+## The example: Payments Trust Fabric
+
+**Why payments as the example:** it's a demanding test for the pattern. It has high volume, adversarial input (hidden
+instructions on merchant pages), regulation, and real harm when an adverse action is wrong. If the pattern holds up
+there, it's likely to hold up in less demanding domains.
 
 ![Agent workflow: the Shield and the Dispatcher run in parallel, a gate routes each case to a lane agent or human triage, and drafts pass a model router, a writer, and an output judge.](docs/images/agent-workflow.png)
-
-## What it does
 
 | Lane | What Microsoft-Decision-1 decides | Possible outcomes |
 |---|---|---|
@@ -28,13 +53,14 @@ Across the workflow, Microsoft-Decision-1 also screens every inbound event for p
 lane (the Dispatcher), chooses which LLM tier writes each draft (the Model Router), and checks every draft against a rubric
 (the Output Judge). A typical case makes 5 to 30 decisions in 2 to 6 calls.
 
-Why a decision model? Microsoft-Decision-1 returns typed answers from options you define, with a calibrated probability
-for each one, in a fraction of a second, at a list price of $0.042 per million tokens. It doesn't generate free-form
-text or call tools. See [Deploy and use Microsoft-Decision-1 in Microsoft Foundry](https://learn.microsoft.com/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision).
-
 ## Architecture
 
 ![Azure architecture: a hosted agent in Foundry Agent Service, Microsoft-Decision-1 and GPT model deployments, a web console on Azure Container Apps, and monitoring.](docs/images/architecture.png)
+
+The diagram shows the production shape: issuer, network, acquirer, and wallet systems send events to the hosted agent
+(flow 1) and receive the outcome, reasons, draft, and decision trace (flow 4), and adverse or uncertain cases go to
+people (flow 5). In this demo, a synthetic dataset and the web console stand in for the payment systems and the case
+management system.
 
 `azd up` creates a new resource group, `rg-<environment-name>`, with:
 
@@ -49,6 +75,10 @@ text or call tools. See [Deploy and use Microsoft-Decision-1 in Microsoft Foundr
 Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Deploy to Azure
+
+Last tested on October 13, 2026 with Azure Developer CLI 1.35.1 and its `azure.ai.agents` extension 1.0.0-beta.19,
+deploying to `swedencentral` with Data Zone Standard deployments. The hosted agent runs on Python 3.13. Some components
+are in preview, so commands and versions can change.
 
 ### Prerequisites
 
@@ -181,6 +211,27 @@ Then:
 - **Audit trail.** Every decision (question, options, probabilities, latency, tokens, cost) is in the case record, sent to
   Application Insights as an OpenTelemetry span, and returned in the agent's response as a tool call.
 
+## From demo to production
+
+This repository is built for demonstration. Before you use the pattern with real customers, plan for at least these
+changes:
+
+- **Connect your payment systems.** In production, issuer, network, acquirer, or wallet systems send events to the hosted
+  agent's endpoint and act on what it returns: the outcome, reasons, any draft message, and the decision trace. In this
+  demo, events come from `data/events.jsonl`, and lookups of customers, merchants, AI agent registry entries, the watch
+  list, and policy limits come from `data/reference.json` (`trust_fabric/case.py`). Replace those lookups with calls to
+  your systems of record.
+- **Keep actions with your systems and people.** The agent decides and explains. Your payment systems hold, credit, or
+  decline, and people approve adverse actions.
+- **Route people's work to your case management system.** The console's review queue is an in-memory demo. Send adverse
+  and uncertain cases to the queues your teams already use.
+- **Secure it.** Add authentication to anything that calls the agent (the demo console has none), use private
+  networking, and review the role assignments.
+- **Calibrate on your data.** Re-tune the thresholds in `trust_fabric/policy.py` on a few hundred labeled historical
+  cases, and keep the evaluations running as your data changes.
+- **Govern it.** Take the questions, thresholds, and evaluation results through your model risk, compliance, and
+  sanctions processes.
+
 ## Repository layout
 
 ```text
@@ -236,7 +287,8 @@ and Application Insights and Log Analytics ingestion. Prices change; use the
 
 ## Responsible AI
 
-- The solution is designed to support, not replace, human decisions and your existing compliance processes.
+- The example is built for demonstration. The pattern is designed to support, not replace, human decisions and
+  your existing compliance processes.
 - Thresholds in `trust_fabric/policy.py` were tuned on synthetic data. Calibrate them on your own labeled history (the
   console's **Calibrate on your data** tab helps) before you automate any gate.
 - Keep your existing fraud models; Microsoft-Decision-1 adds judgments over text and context, and routes work between
